@@ -4,3 +4,4 @@ test-results/
 screenshots/
 allure-results/
 .env
+.DS_Store

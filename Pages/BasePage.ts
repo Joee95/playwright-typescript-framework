@@ -1,5 +1,4 @@
 import { Page, Locator, expect } from '@playwright/test';
-import {text} from "node:stream/iter";
 
 export class BasePage {
   protected page: Page;
@@ -27,7 +26,7 @@ export class BasePage {
     const element = typeof locator === 'string' ? this.page.locator(locator) : locator;
     await element.waitFor({ state: 'attached', timeout: this.timeout });
     await element.waitFor({ state: 'visible', timeout: this.timeout });
-    await element.isEnabled();
+    await expect(element).toBeEnabled();
     return element;
   }
 
@@ -70,13 +69,13 @@ export class BasePage {
       return true;
     } catch {
       return false;
-    }
+    } 
   }
 
   async takeScreenshot(testName: string, folder: string = 'screenshots'): Promise<string>  {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
     const fileName = `${testName}_${timestamp}.png`;
-    const path = `${folder}/${timestamp}`;
+    const path = `${folder}/${fileName}`;
     await this.page.screenshot({path , fullPage: true});
     return path;
   }
