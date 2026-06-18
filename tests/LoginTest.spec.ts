@@ -1,5 +1,5 @@
 import {test} from "@playwright/test";
-import {testData} from "../data/testData";
+import {testData} from "../data/loginTestData";
 import {LoginPage} from "../Pages/LoginPage";
 
 test.describe('Login Feature', () => {
