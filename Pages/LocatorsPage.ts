@@ -19,7 +19,7 @@ export class LocatorsPage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.roleLocator = this.page.getByRole('link', {name: 'Contact'});
-        this.textLocator = this.page.getByText('🔥 Hot Deal: Buy 1 Get 1 Free');
+        this.textLocator = this.page.getByText(/Hot Deal: Buy 1 Get 1 Free/);
         this.labelLocator = this.page.getByLabel('Email for newsletter');
         this.placeholderLocator = this.page.getByPlaceholder('Search the site');
         this.altTextLocator = this.page.getByAltText('User avatar');
@@ -33,12 +33,24 @@ export class LocatorsPage extends BasePage {
 
     async navigateToLoginPage() {
         await this.page.goto("https://practice.expandtesting.com/locators")
-        await this.page.setViewportSize({width: 1920, height: 1080});
     }
 
     async GetByRole(): Promise<void> {
         await this.click(this.roleLocator);
         await expect(this.page).toHaveURL(/contact/);
         await expect(this.page).toHaveTitle('Contact form page for Automation Testing Practice');
+    }
+
+    async GetByText(): Promise<void> {
+        await expect(this.textLocator).toContainText("Deal: Buy 1 Get 1 Free");
+    }
+
+    async GetByLabel(): Promise<void> {
+        await this.type(this.labelLocator, 'yousef.kenawyy@gmail.com');
+        await expect(this.labelLocator).toHaveValue('yousef.kenawyy@gmail.com');
+    }
+
+    async TableXpath(): Promise<void> {
+        await expect(this.tableXpathLocator).toContainText("Headphones");
     }
 }
