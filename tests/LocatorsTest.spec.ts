@@ -24,7 +24,7 @@ test.describe('Locators Feature', () => {
         await locatorsPage.GetByLabel();
     });
 
-    test('Xpath_Table Locator', async ({page}) => {
+        test('Xpath_Table Locator', async ({page}) => {
         const locatorsPage = new LocatorsPage(page);
         await locatorsPage.navigateToLoginPage();
         await locatorsPage.TableXpath();
